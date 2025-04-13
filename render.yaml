@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: weatherwise-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 5009
+      - key: OPENWEATHERMAP_API_KEY
+        sync: false
+    autoDeploy: false
+    rootDir: server
+
+  - type: web
+    name: weatherwise-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://weatherwise-backend.onrender.com
+    autoDeploy: false
+    rootDir: client
