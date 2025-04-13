@@ -1,5 +1,8 @@
 # WeatherWise Dashboard
 
+## App Link
+https://weatherwise-dashboard.netlify.app/
+
 A real-time weather dashboard built with the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to search for weather information by city name.
 
 ## Features
