@@ -3,6 +3,8 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import WeatherCard from './components/WeatherCard';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudBolt, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -54,10 +56,18 @@ function App() {
     fetchWeatherData(city);
   };
 
+  const removeFromHistory = (cityToRemove) => {
+    const updatedHistory = searchHistory.filter(city => city !== cityToRemove);
+    setSearchHistory(updatedHistory);
+  };
+
   return (
     <div className="app">
       <div className="container">
-        <h1 className="app-title">WeatherWise Dashboard</h1>
+        <h1 className="app-title">
+          <FontAwesomeIcon icon={faCloudBolt} className="weather-icon" />
+          WeatherWise Dashboard
+        </h1>
         <SearchBar onSearch={fetchWeatherData} />
         
         {searchHistory.length > 0 && (
@@ -65,13 +75,21 @@ function App() {
             <h3>Recent Searches</h3>
             <div className="history-items">
               {searchHistory.map((city, index) => (
-                <button 
-                  key={index} 
-                  className="history-item"
-                  onClick={() => handleHistoryClick(city)}
-                >
-                  {city}
-                </button>
+                <div key={index} className="history-item-container">
+                  <button 
+                    className="history-item"
+                    onClick={() => handleHistoryClick(city)}
+                  >
+                    {city}
+                  </button>
+                  <button 
+                    className="remove-history-item"
+                    onClick={() => removeFromHistory(city)}
+                    title="Remove from history"
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
               ))}
             </div>
           </div>
