@@ -31,7 +31,7 @@ function App() {
       setLoading(true);
       setError(null);
       
-      const response = await axios.get(`http://localhost:5009/api/weather?city=${city}`);
+      const response = await axios.get(`https://weatherwise-dashboard-bckend.onrender.com/api/weather?city=${city}`);
       
       setWeatherData(response.data);
       
